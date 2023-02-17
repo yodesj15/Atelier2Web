@@ -213,8 +213,13 @@
 
         coordViewportX = e.offsetX / viewportScreen;
         coordViewportX = Math.round((coordViewportX / (smallUnit / 2)) * (smallUnit / 2));
-        if (coordViewportX > 0 && coordViewportX <= maxPosition) {
+        if (coordViewportX >= 0 && coordViewportX <= maxPosition) {
             cursor.style.transform = "translate(" + coordViewportX + 'px, 0px)';
+            let levelValue = coordViewportX / smallUnit * 0.2;
+            level.value = formatDecimal(levelValue, 1);
+            level.style.color = "rgb(" + levelValue / 10 * 255 + ",0 ,0)";
+            cursor.style.fill = "rgb(" + levelValue / 10 * 255 + ",0 ,0)";
+            cursor.style.stroke = "rgb(" + (255 - levelValue / 10 * 255) + ",0 ,0)";
         }
         mouseIsDown = true;
     });
@@ -224,7 +229,7 @@
             coordViewportX = e.offsetX / viewportScreen;
             coordViewportX = Math.round((coordViewportX / (smallUnit / 2)) * (smallUnit / 2));
 
-            if (coordViewportX > 0 && coordViewportX <= maxPosition) {
+            if (coordViewportX >= 0 && coordViewportX <= maxPosition) {
                 cursor.style.transform = "translate(" + coordViewportX + 'px, 0px)';
                 let levelValue = coordViewportX / smallUnit * 0.2;
                 level.value = formatDecimal(levelValue, 1);
